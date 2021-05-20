@@ -1,0 +1,15 @@
+name: osuosl-baseline
+title: OSUOSL Baseline InSpec Profile
+maintainer: Lance Albertson
+copyright: Oregon State University
+copyright_email: lance@osuosl.org
+license: Apache-2.0
+summary: Ensures a secure configuration on OSUOSL systems
+version: 0.1.0
+supports:
+  platform: os
+inputs:
+  - name: ssl_port
+    value: 443
+  - name: ssl_host
+    value: localhost
