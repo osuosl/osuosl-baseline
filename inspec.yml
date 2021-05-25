@@ -10,6 +10,8 @@ supports:
   platform: os
 inputs:
   - name: ssl_port
-    value: 443
+    type: Array
+    value:
+      - 443
   - name: ssl_host
     value: localhost
