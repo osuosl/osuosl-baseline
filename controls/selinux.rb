@@ -16,4 +16,8 @@ control 'selinux' do
       it { should_not be_enforcing }
     end
   end
+
+  describe file('/var/log/audit/audit.log') do
+    its('content') { should_not match /^type=AVC/ }
+  end
 end
