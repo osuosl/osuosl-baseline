@@ -1,7 +1,9 @@
+docker = inspec.file('/.dockerenv').exist?
+
 control 'selinux' do
   title 'Verify SELinux state'
 
-  if os.family == 'redhat'
+  if os.family == 'redhat' && !docker
     desired_state = input('selinux')
 
     describe selinux do
