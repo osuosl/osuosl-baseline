@@ -1,8 +1,13 @@
 ports = input('ssl_port')
 host = input('ssl_host')
+docker = inspec.file('/.dockerenv').exist?
 
 control 'ssl-baseline' do
   title 'Verify SSL security'
+
+  only_if('not in docker container') do
+    !docker
+  end
 
   ports.each do |port|
     describe ssl(port: port, host: host).ciphers(/WITH_3DES/) do
