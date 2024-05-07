@@ -5,7 +5,7 @@ copyright: Oregon State University
 copyright_email: lance@osuosl.org
 license: Apache-2.0
 summary: Ensures a secure configuration on OSUOSL systems
-version: 0.2.2
+version: 0.2.3
 supports:
   platform: os
 inputs:

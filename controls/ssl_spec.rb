@@ -1,25 +1,21 @@
 ports = input('ssl_port')
 host = input('ssl_host')
-docker = inspec.file('/.dockerenv').exist?
+ip_address = host || inspec.interfaces.ipv4_address
 
 control 'ssl-baseline' do
   title 'Verify SSL security'
 
-  only_if('not in docker container') do
-    !docker
-  end
-
   ports.each do |port|
-    describe ssl(port: port, host: host).ciphers(/WITH_3DES/) do
+    describe ssl(port: port, host: ip_address).ciphers(/WITH_3DES/) do
       it { should_not be_enabled }
     end
 
-    describe ssl(port: port, host: host).ciphers(/WITH_RC4/) do
+    describe ssl(port: port, host: ip_address).ciphers(/WITH_RC4/) do
       it { should_not be_enabled }
     end
 
     %w(ssl2 ssl3 tls1.0 tls1.1).each do |p|
-      describe ssl(port: port, host: host).protocols(p) do
+      describe ssl(port: port, host: ip_address).protocols(p) do
         it { should_not be_enabled }
       end
     end
