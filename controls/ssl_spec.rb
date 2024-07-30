@@ -1,6 +1,10 @@
 ports = input('ssl_port')
 host = input('ssl_host')
-ip_address = host || inspec.interfaces.ipv4_address || '127.0.0.1'
+begin
+  ip_address = host || inspec.interfaces.ipv4_address
+rescue IPAddr::InvalidAddressError
+  ip_address = '127.0.0.1'
+end
 
 control 'ssl-baseline' do
   title 'Verify SSL security'
